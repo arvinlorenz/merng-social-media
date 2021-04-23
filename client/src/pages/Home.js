@@ -3,6 +3,28 @@ import { useQuery } from '@apollo/client'
 import gql from 'graphql-tag'
 import { Grid } from 'semantic-ui-react'
 import PostCard from '../components/PostCard'
+
+const FETCH_POST_QUERY = gql`
+  {
+    getPosts {
+      id
+      body
+      createdAt
+      username
+      likeCount
+      likes {
+        username
+      }
+      commentCount
+      comments {
+        id
+        username
+        createdAt
+        body
+      }
+    }
+  }
+`
 function Home() {
   const {
     loading,
@@ -30,25 +52,4 @@ function Home() {
   )
 }
 
-const FETCH_POST_QUERY = gql`
-  {
-    getPosts {
-      id
-      body
-      createdAt
-      username
-      likeCount
-      likes {
-        username
-      }
-      commentCount
-      comments {
-        id
-        username
-        createdAt
-        body
-      }
-    }
-  }
-`
 export default Home
